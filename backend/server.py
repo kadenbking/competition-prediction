@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import request
-from mlb import *
+from leagues.mlb import *
 
 app = Flask(__name__)
 

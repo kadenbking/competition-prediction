@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar } from "flowbite-react";
 import { ThemeContext } from "./ThemeContext";
 import { FaSun, FaMoon } from "react-icons/fa";
+import logo from "./../img/cp-logo.png";
 
 function Nav() {
   const { theme, setTheme } = React.useContext(ThemeContext);
@@ -9,13 +10,9 @@ function Nav() {
   return (
     <Navbar fluid={true} rounded={false}>
       <Navbar.Brand href="/">
-        <img
-          src="https://flowbite.com/docs/images/logo.svg"
-          className="mr-3 h-6 sm:h-9"
-          alt="Flowbite Logo"
-        />
+        <img src={logo} className="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          Flowbite
+          Competition Prediction
         </span>
       </Navbar.Brand>
       <Navbar.Toggle />

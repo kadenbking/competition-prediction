@@ -11,7 +11,7 @@ function Footer() {
         year={2022}
       />
       <FlowbiteFooter.LinkGroup>
-        <FlowbiteFooter.Link href="#">
+        <FlowbiteFooter.Link href="https://github.com/kadenbking/competition-prediction">
           <div className="flex flex-row my-5">
             <FlowbiteFooter.Icon icon={FaGithub} className="mx-2" />
             <span className="mx-2">View Our GitHub Repository</span>

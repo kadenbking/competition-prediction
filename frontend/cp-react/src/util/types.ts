@@ -1,0 +1,1 @@
+export type teamColor = "red" | "orange" | "yellow" | "green" | "blue" | "navy" | "purple" | "gray";

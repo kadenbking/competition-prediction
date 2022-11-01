@@ -1,5 +1,5 @@
 
-teams = ["royals", "tigers", "guardians", "twins", "white sox"]
+teams = ["KC", "DET", "CLE", "MIN", "CWS"]
 
 def getTeams():
     return teams

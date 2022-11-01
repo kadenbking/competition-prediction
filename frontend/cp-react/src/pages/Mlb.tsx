@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { mlbTeamColors } from "../util/teams";
 
 function Mlb() {
   const [teamsList, setTeamsList] = useState<string[]>();
@@ -17,7 +18,10 @@ function Mlb() {
   }
 
   const listItems = teamsList?.map((team) => (
-    <li className="text-2xl text-black dark:text-white" key={team.toString()}>
+    <li
+      className={`text-2xl text-black p-2 m-2 bg-${mlbTeamColors[team]}-400`}
+      key={team.toString()}
+    >
       {team}
     </li>
   ));

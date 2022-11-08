@@ -4,6 +4,11 @@ from leagues.mlb import *
 
 app = Flask(__name__)
 
+# Home API Route
+@app.route('/')
+def home():
+    return "Welcome to compeition-prediction!"
+
 # MLB API Route
 @app.route('/mlb', methods=['GET'])
 def mlb():

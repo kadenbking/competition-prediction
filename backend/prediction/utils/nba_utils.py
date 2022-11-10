@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
-
-from prediction.data_scrapers.nba_scraper import getTeamStats
+from data_scrapers.nba_scraper import getTeamStats
 
 def get_team_data(team_id, year, header=False):
     team_stats_tuple = getTeamStats(team_id, year)

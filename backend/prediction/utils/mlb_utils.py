@@ -1,26 +1,20 @@
-# this was done to play around with regression ...
-# helped me determine which stats have great correlation with wins
-# ill tweak it a bit once the season starts, think i can predict total season wins based on a few games of performance.
 import pandas as pd
 import numpy as np
 
-from data_scrapers.nba_scraper import getTeamStats
+from data_scrapers.mlb_scraper import getTeamStats
 
-
-# return arrays of length 42
 def get_team_data(team_id, year, header=False):
     team_stats_tuple = getTeamStats(team_id, year)
 
-    regular_stats_raw = np.array(team_stats_tuple[0].iloc[1,2:])
-    regular_stats = list(map(lambda value: float(value), regular_stats_raw))
-    regular_stats_header = team_stats_tuple[1][2:]
+    batting_stats_raw = np.array(team_stats_tuple[0].iloc[1,5:])
+    batting_stats = list(map(lambda value: float(value), batting_stats_raw))
+    batting_stats_header = team_stats_tuple[1][5:]
 
-    advanced_stats = np.array(team_stats_tuple[2].iloc[0, 1:-2])
-    advanced_stats_header_raw = team_stats_tuple[3][1:-2]
-    advanced_stats_header = list(map(lambda tuple: tuple[1], advanced_stats_header_raw))
+    pitching_stats = np.array(team_stats_tuple[2].iloc[1,4:])
+    pitching_stats_header = team_stats_tuple[3][4:]
 
-    stats_full = np.concatenate((regular_stats, advanced_stats), axis=None)
-    header_full = np.concatenate((regular_stats_header, advanced_stats_header), axis=None)
+    stats_full = np.concatenate((batting_stats, pitching_stats), axis=None)
+    header_full = np.concatenate((batting_stats_header, pitching_stats_header), axis=None)
 
     if header == True:
         return header_full
@@ -104,76 +98,74 @@ def predictWins(weights, X):
 if __name__ == '__main__':
 
     # set up
-    FORECAST_FILE = 'data/teams_test.csv'
-    teams_df = pd.read_csv(FORECAST_FILE)
-    all_teams = np.array(teams_df["Team"])
-    stat_header = get_team_data('POR', '2019', header=True)
+    royals = get_team_data('KCR', '2021', True)
+    print(royals)
 
-    train_test_division = 70
+    # train_test_division = 70
 
-    full_df_2019 = generate_teams_training_data(all_teams, stat_header, '2019')
-    full_df_2018 = generate_teams_training_data(all_teams, stat_header, '2018')
-    full_df_2017 = generate_teams_training_data(all_teams, stat_header, '2017')
+    # full_df_2019 = generate_teams_training_data(all_teams, stat_header, '2019')
+    # full_df_2018 = generate_teams_training_data(all_teams, stat_header, '2018')
+    # full_df_2017 = generate_teams_training_data(all_teams, stat_header, '2017')
 
-    years_dfs = [full_df_2019, full_df_2018, full_df_2017]
-    full_df = pd.concat(years_dfs, ignore_index=True)
-    # print(full_df)
+    # years_dfs = [full_df_2019, full_df_2018, full_df_2017]
+    # full_df = pd.concat(years_dfs, ignore_index=True)
+    # # print(full_df)
+    # # print()
+
+    # Y_df = full_df[['W']]
+    # max_wins = np.amax(np.array(Y_df))
+    # X_df = full_df[['PTS','TOV','eFG%','FTr','ORB','DRB','MOV','ORtg','DRtg','AST','BLK']]
+    # X_df = clean_up_df(X_df)
+
+    # # print(X_df)
+    # # print()
+    # # print(Y_df)
+
+    # # everything scaled
+    # scaled_X_df = feature_scaled_df(X_df)
+    # scaled_Y_df = feature_scaled_df(Y_df)
+
+
+    # training_X_data = scaled_X_df.iloc[:train_test_division,:]
+    # training_Y_data = scaled_Y_df.iloc[:train_test_division,:]
+    # # training_team_names = all_teams[:train_test_division]
+
+    # test_X_data = scaled_X_df.iloc[train_test_division:,:]
+    # test_Y_data = scaled_Y_df.iloc[train_test_division:,:]
+    # # test_team_names = all_teams[train_test_division:]
+
+    # print("TRAINING DATA")
+    # print(training_X_data)
+    # print()
+    # print(training_Y_data)
+    # print()
+    # #
+    # # print("TESTING DATA")
+    # # print(test_X_data)
+    # # print()
+    # # print(test_Y_data)
+    # # print()
+
+    # X = np.array(training_X_data)
+    # Y = np.ravel(np.array(training_Y_data))
+
+    # input("Press enter to train weights")
     # print()
 
-    Y_df = full_df[['W']]
-    max_wins = np.amax(np.array(Y_df))
-    X_df = full_df[['PTS','TOV','eFG%','FTr','ORB','DRB','MOV','ORtg','DRtg','AST','BLK']]
-    X_df = clean_up_df(X_df)
+    # # training
+    # alpha = 0.20
+    # epochs = 200000
+    # weights = train(X, Y, epochs, alpha)
 
-    # print(X_df)
+
+    # # testing
     # print()
-    # print(Y_df)
-
-    # everything scaled
-    scaled_X_df = feature_scaled_df(X_df)
-    scaled_Y_df = feature_scaled_df(Y_df)
-
-
-    training_X_data = scaled_X_df.iloc[:train_test_division,:]
-    training_Y_data = scaled_Y_df.iloc[:train_test_division,:]
-    # training_team_names = all_teams[:train_test_division]
-
-    test_X_data = scaled_X_df.iloc[train_test_division:,:]
-    test_Y_data = scaled_Y_df.iloc[train_test_division:,:]
-    # test_team_names = all_teams[train_test_division:]
-
-    print("TRAINING DATA")
-    print(training_X_data)
-    print()
-    print(training_Y_data)
-    print()
-    #
-    # print("TESTING DATA")
-    # print(test_X_data)
-    # print()
-    # print(test_Y_data)
+    # print(weights)
     # print()
 
-    X = np.array(training_X_data)
-    Y = np.ravel(np.array(training_Y_data))
+    # test_X = np.array(test_X_data)
+    # test_Y = np.ravel(np.array(test_Y_data))
 
-    input("Press enter to train weights")
-    print()
-
-    # training
-    alpha = 0.20
-    epochs = 200000
-    weights = train(X, Y, epochs, alpha)
-
-
-    # testing
-    print()
-    print(weights)
-    print()
-
-    test_X = np.array(test_X_data)
-    test_Y = np.ravel(np.array(test_Y_data))
-
-    predictions = predictWins(weights, test_X)
-    for i in range(len(predictions)):
-        print("{} wins".format(predictions[i]*max_wins))
+    # predictions = predictWins(weights, test_X)
+    # for i in range(len(predictions)):
+    #     print("{} wins".format(predictions[i]*max_wins))

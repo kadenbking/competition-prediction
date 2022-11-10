@@ -1,9 +1,8 @@
-import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import random
-from utils import get_team_data, generate_dataframe
+from utils.nba_utils import get_team_data, generate_dataframe
 
 
 def getTeamDf(team_id, year):

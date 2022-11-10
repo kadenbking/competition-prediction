@@ -1,4 +1,4 @@
-from sim import simulate_game
+from sims.mlb_sim import simulate_game
 import sys
 
 if __name__ == "__main__":

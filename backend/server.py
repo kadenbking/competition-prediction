@@ -1,34 +1,35 @@
 from flask import Flask
 from flask import request
-from leagues.mlb import *
+from util.leagues import *
 
 app = Flask(__name__)
 
-# Home API Route
+# Home Route
 @app.route('/')
 def home():
     return "Welcome to compeition-prediction!"
 
-# MLB API Route
-@app.route('/mlb', methods=['GET'])
+# GET TEAMS ROUTE
+@app.route('/get-teams', methods=['GET'])
 def mlb():
-    # home_team = request.args['homeTeam']
-    # away_team = request.args['awayTeam']
+    league = request.args['league']
     try:
-        teams = getTeams()
+        teams = getTeams(league)
         return teams
     except KeyError:
-        return 'Major League Baseball'
+        return 'Error! Something is not working...'
 
-# NBA API Route
-
-# NFL API Route
-
-# NHL API Route
-
-# NCAAF API Route
-
-# NCAAB API Route
+# PREDICT ROUTE
+# @app.route('/predict', methods=['GET'])
+# def mlb():
+#     league = request.args['league']
+#     home_team = request.args['homeTeam']
+#     away_team = request.args['awayTeam']
+#     try:
+#         outcome = predictResult(league, home_team, away_team)
+#         return outcome
+#     except KeyError:
+#         return 'Error! Something is not working...'
 
 if __name__ == "__main__":
     app.run()

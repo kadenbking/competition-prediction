@@ -22,84 +22,89 @@ def get_team_data(team_id, year, header=False):
         return stats_full
 
 
-def get_all_teams_data(teams, year):
-    team_stats_array = []
-    for team in teams:
-        team_stats = get_team_data(team, year)
-        team_stats_array.append(team_stats)
-    return team_stats_array
+# def get_all_teams_data(teams, year):
+#     team_stats_array = []
+#     for team in teams:
+#         team_stats = get_team_data(team, year)
+#         team_stats_array.append(team_stats)
+#     return team_stats_array
 
 
 def generate_dataframe(rows, header):
     df = pd.DataFrame(rows, columns=header)
     return df
 
+# TODO: Create model to output team score
+def generate_team_score(df):
+    return 1
 
-def generate_teams_training_data(teams, header, year):
-    all_teams_data = get_all_teams_data(teams, year)
-    training_df = generate_dataframe(all_teams_data, header)
-    return training_df
-
-
-def clean_up_df(df):
-    cols = []
-    efg_count = 0
-    tov_count = 0
-    ftfga_count = 0
-    for column in df.columns:
-        if column == 'eFG%':
-            cols.append('eFG%_' + str(efg_count))
-            efg_count += 1
-            continue
-        if column == 'TOV%':
-            cols.append('TOV%_' + str(tov_count))
-            tov_count += 1
-            continue
-        if column == 'FT/FGA':
-            cols.append('FT/FGA_' + str(ftfga_count))
-            ftfga_count += 1
-            continue
-        cols.append(column)
-    df.columns = cols
-    return df
+# def generate_teams_training_data(teams, header, year):
+#     all_teams_data = get_all_teams_data(teams, year)
+#     training_df = generate_dataframe(all_teams_data, header)
+#     return training_df
 
 
-def feature_scaled_df(df):
-    for column in df:
-        df[column] = df[column].apply(lambda x: x/df[column].max())
-    return df
+# def clean_up_df(df):
+#     cols = []
+#     efg_count = 0
+#     tov_count = 0
+#     ftfga_count = 0
+#     for column in df.columns:
+#         if column == 'eFG%':
+#             cols.append('eFG%_' + str(efg_count))
+#             efg_count += 1
+#             continue
+#         if column == 'TOV%':
+#             cols.append('TOV%_' + str(tov_count))
+#             tov_count += 1
+#             continue
+#         if column == 'FT/FGA':
+#             cols.append('FT/FGA_' + str(ftfga_count))
+#             ftfga_count += 1
+#             continue
+#         cols.append(column)
+#     df.columns = cols
+#     return df
 
 
-def predict(X, W):
-    return np.dot(X, W.T)
+# def feature_scaled_df(df):
+#     for column in df:
+#         df[column] = df[column].apply(lambda x: x/df[column].max())
+#     return df
 
 
-def train(X, Y, epochs, l_rate):
-    W = np.zeros(X.shape[1])
-    m = X.shape[0]
-    for epoch in range(epochs):
-        h = predict(X, W)
-        loss = h - Y
-        error = np.sum(loss ** 2) / (2*m)
-        if epoch%1000 == 0 or epoch+1 == epochs:
-            print("Epoch {}, Error: {}".format(epoch, error))
-        gradient = np.dot(X.T, loss) / m
-        W_delta = l_rate * gradient
-        W -= W_delta
-    return W
+# def predict(X, W):
+#     return np.dot(X, W.T)
 
 
-def predictWins(weights, X):
-    predictions = predict(X, weights)
-    # print(predictions)
-    return predictions
+# def train(X, Y, epochs, l_rate):
+#     W = np.zeros(X.shape[1])
+#     m = X.shape[0]
+#     for epoch in range(epochs):
+#         h = predict(X, W)
+#         loss = h - Y
+#         error = np.sum(loss ** 2) / (2*m)
+#         if epoch%1000 == 0 or epoch+1 == epochs:
+#             print("Epoch {}, Error: {}".format(epoch, error))
+#         gradient = np.dot(X.T, loss) / m
+#         W_delta = l_rate * gradient
+#         W -= W_delta
+#     return W
+
+
+# def predictWins(weights, X):
+#     predictions = predict(X, weights)
+#     # print(predictions)
+#     return predictions
 
 
 if __name__ == '__main__':
 
-    # set up
-    royals = get_team_data('KCR', '2021', True)
-    print(royals)
+    df_header = get_team_data('KCR', '2021', header=True)
+    df_row = [get_team_data('KCR', '2021')]
+    df = generate_dataframe(df_row, df_header)
+
+    df.to_csv("tada.csv")
 
     # train_test_division = 70
 

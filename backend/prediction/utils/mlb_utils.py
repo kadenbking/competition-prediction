@@ -100,13 +100,18 @@ def generate_team_score(df):
 
 if __name__ == '__main__':
 
-    df_header = get_team_data('KCR', '2021', header=True)
-    teams = ['KCR', 'BAL']
-    all_teams_stats = get_all_teams_data(teams, '2021')
+    # CODE TO GENERATE DF
+    # df_header = get_team_data('KCR', '2021', header=True)
+    # teams = ['ARI', 'ATL', 'BAL', 'BOS', 'CHC', 'CHW', 'CIN', 'CLE', 'COL', 'DET', 'HOU', 'KCR', 'LAA', 'LAD', 'MIA', 'MIL', 'MIN', 'NYM', 'NYY', 'OAK', 'PHI', 'PIT', 'SDP', 'SFG', 'SEA', 'STL', 'TBR', 'TEX', 'TOR', 'WSN']
+    # all_teams_stats = get_all_teams_data(teams, '2021')
+    # df = generate_dataframe(all_teams_stats, df_header)
+    # df.to_csv("all_2021_teams.csv")
 
-    df = generate_dataframe(all_teams_stats, df_header)
+    # USE THIS AS DF FOR TESTING AND TRAINING
+    df = pd.read_csv('all_2021_teams.csv')
+    print(df)
 
-    df.to_csv("tada.csv")
+    # TODO: GRAB A ROW OF THE DF TO USE AS INPUT TO THE MODEL => OUPUT SCORE
 
     # train_test_division = 70
 

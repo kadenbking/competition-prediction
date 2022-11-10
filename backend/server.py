@@ -21,13 +21,15 @@ def home():
 #         return 'Error! Something is not working...'
 
 # PREDICT ROUTE
-@app.route('/predict', methods=['GET'])
-def mlb():
-    home_team = request.args['homeTeam']
-    away_team = request.args['awayTeam']
+@app.route('/predict/<league>/<homeTeam>/<awayTeam>', methods=['GET'])
+def mlb(league=None, homeTeam=None, awayTeam=None):
+    # home_team = request.args['homeTeam']
+    # away_team = request.args['awayTeam']
     try:
-        outcome = predict_nba_game(home_team, away_team)
-        return outcome
+        if (league == "nba"):
+            outcome = predict_nba_game(homeTeam, awayTeam)
+            return outcome
+        return "League Not Supported."
     except KeyError:
         return 'Error! Something is not working...'
 

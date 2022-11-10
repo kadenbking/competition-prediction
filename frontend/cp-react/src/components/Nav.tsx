@@ -20,7 +20,7 @@ function Nav() {
         <Navbar.Link href="/mlb" className="text-lg align-middle">
           MLB
         </Navbar.Link>
-        <Navbar.Link href="/mlb" className="text-lg align-middle">
+        <Navbar.Link href="/nba" className="text-lg align-middle">
           NBA
         </Navbar.Link>
         <Navbar.Link href="/mlb" className="text-lg align-middle">

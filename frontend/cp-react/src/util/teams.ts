@@ -65,3 +65,11 @@ export const nbaTeamColors: { [team: string]: teamColor } = {
     "NOL": "navy",
     "SA": "gray",
 };
+
+export const nbaTeams = [
+    'TOR', 'NOP', 'LAC', 'LAL', 'CHO', 'CHI', 'IND',
+    'DET', 'ORL', 'CLE', 'BRK', 'MIN', 'MIA', 'MEM',
+    'PHI', 'BOS', 'DAL', 'WAS', 'SAS', 'NYK', 'UTA',
+    'OKC', 'POR', 'DEN', 'PHO', 'SAC', 'ATL', 'HOU',
+    'MIL', 'GSW'
+]

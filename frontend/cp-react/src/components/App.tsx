@@ -4,6 +4,7 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 import Home from "../pages/Home";
 import Mlb from "../pages/Mlb";
+import Nba from "../pages/Nba";
 import PageNotFound from "../pages/PageNotFound";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/mlb" element={<Mlb />} />
+          <Route path="/nba" element={<Nba />} />
           <Route path="/404" element={<PageNotFound />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>

@@ -22,12 +22,12 @@ def get_team_data(team_id, year, header=False):
         return stats_full
 
 
-# def get_all_teams_data(teams, year):
-#     team_stats_array = []
-#     for team in teams:
-#         team_stats = get_team_data(team, year)
-#         team_stats_array.append(team_stats)
-#     return team_stats_array
+def get_all_teams_data(teams, year):
+    team_stats_array = []
+    for team in teams:
+        team_stats = get_team_data(team, year)
+        team_stats_array.append(team_stats)
+    return team_stats_array
 
 
 def generate_dataframe(rows, header):
@@ -101,8 +101,10 @@ def generate_team_score(df):
 if __name__ == '__main__':
 
     df_header = get_team_data('KCR', '2021', header=True)
-    df_row = [get_team_data('KCR', '2021')]
-    df = generate_dataframe(df_row, df_header)
+    teams = ['KCR', 'BAL']
+    all_teams_stats = get_all_teams_data(teams, '2021')
+
+    df = generate_dataframe(all_teams_stats, df_header)
 
     df.to_csv("tada.csv")
 

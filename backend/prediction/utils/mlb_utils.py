@@ -115,24 +115,33 @@ if __name__ == '__main__':
     df = pd.read_csv('all_2021_teams.csv')
     # print(df)
 
-    df_header = get_team_data('KCR', '2021', header=True)
+    # df_header = get_team_data('KCR', '2021', header=True)
+    ###### I think df_row might be all you need as input for the model -- you might not need the labels at all #####
     df_row = [get_team_data('KCR', '2021')]
-    team_df = generate_dataframe(df_row, df_header)
+    # team_df = generate_dataframe(df_row, df_header)
 
-
+    ##### I also think we might want to compute X and y differently -- look up the docs for train_test_split and let me know what you think #####
     X = df.drop(['W'], axis=1)
     Y = df['W']
-    train_x, test_x, train_y, test_y = train_test_split(X, Y, random_state=42, train_size=0.96, test_size=0.03, shuffle=True)
+    train_x, test_x, train_y, test_y = train_test_split(X, Y, random_state=42, train_size=0.8, test_size=0.2, shuffle=True)
 
-    scaler = MinMaxScaler()
-    train_data = scaler.fit_transform(train_x)
-    test_data = scaler.fit_transform(test_x)
+    print("train_x")
+    print(train_x)
 
-    svc = SVC(kernel='rbf')
-    svc.fit(train_data, train_y)
+    print("test_x")
+    print(test_x)
 
-    pred = svc.predict(team_df)
+    print("train_y")
+    print(train_y)
 
-    accuracy = accuracy_score(test_y, pred)
+    print("test_y")
+    print(test_y)
 
-    print(accuracy)
+    # svc = SVC(kernel='rbf')
+    # svc.fit(train_x, train_y)
+
+    # pred = svc.predict(team_df)
+
+    # accuracy = accuracy_score(test_y, pred)
+
+    # print(accuracy)

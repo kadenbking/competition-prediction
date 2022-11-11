@@ -1,5 +1,9 @@
 import pandas as pd
 import numpy as np
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
 
 from data_scrapers.mlb_scraper import getTeamStats
 
@@ -109,75 +113,26 @@ if __name__ == '__main__':
 
     # USE THIS AS DF FOR TESTING AND TRAINING
     df = pd.read_csv('all_2021_teams.csv')
-    print(df)
+    # print(df)
 
-    # TODO: GRAB A ROW OF THE DF TO USE AS INPUT TO THE MODEL => OUPUT SCORE
-
-    # train_test_division = 70
-
-    # full_df_2019 = generate_teams_training_data(all_teams, stat_header, '2019')
-    # full_df_2018 = generate_teams_training_data(all_teams, stat_header, '2018')
-    # full_df_2017 = generate_teams_training_data(all_teams, stat_header, '2017')
-
-    # years_dfs = [full_df_2019, full_df_2018, full_df_2017]
-    # full_df = pd.concat(years_dfs, ignore_index=True)
-    # # print(full_df)
-    # # print()
-
-    # Y_df = full_df[['W']]
-    # max_wins = np.amax(np.array(Y_df))
-    # X_df = full_df[['PTS','TOV','eFG%','FTr','ORB','DRB','MOV','ORtg','DRtg','AST','BLK']]
-    # X_df = clean_up_df(X_df)
-
-    # # print(X_df)
-    # # print()
-    # # print(Y_df)
-
-    # # everything scaled
-    # scaled_X_df = feature_scaled_df(X_df)
-    # scaled_Y_df = feature_scaled_df(Y_df)
+    df_header = get_team_data('KCR', '2021', header=True)
+    df_row = [get_team_data('KCR', '2021')]
+    team_df = generate_dataframe(df_row, df_header)
 
 
-    # training_X_data = scaled_X_df.iloc[:train_test_division,:]
-    # training_Y_data = scaled_Y_df.iloc[:train_test_division,:]
-    # # training_team_names = all_teams[:train_test_division]
+    X = df.drop(['W'], axis=1)
+    Y = df['W']
+    train_x, test_x, train_y, test_y = train_test_split(X, Y, random_state=42, train_size=0.96, test_size=0.03, shuffle=True)
 
-    # test_X_data = scaled_X_df.iloc[train_test_division:,:]
-    # test_Y_data = scaled_Y_df.iloc[train_test_division:,:]
-    # # test_team_names = all_teams[train_test_division:]
+    scaler = MinMaxScaler()
+    train_data = scaler.fit_transform(train_x)
+    test_data = scaler.fit_transform(test_x)
 
-    # print("TRAINING DATA")
-    # print(training_X_data)
-    # print()
-    # print(training_Y_data)
-    # print()
-    # #
-    # # print("TESTING DATA")
-    # # print(test_X_data)
-    # # print()
-    # # print(test_Y_data)
-    # # print()
+    svc = SVC(kernel='rbf')
+    svc.fit(train_data, train_y)
 
-    # X = np.array(training_X_data)
-    # Y = np.ravel(np.array(training_Y_data))
+    pred = svc.predict(team_df)
 
-    # input("Press enter to train weights")
-    # print()
+    accuracy = accuracy_score(test_y, pred)
 
-    # # training
-    # alpha = 0.20
-    # epochs = 200000
-    # weights = train(X, Y, epochs, alpha)
-
-
-    # # testing
-    # print()
-    # print(weights)
-    # print()
-
-    # test_X = np.array(test_X_data)
-    # test_Y = np.ravel(np.array(test_Y_data))
-
-    # predictions = predictWins(weights, test_X)
-    # for i in range(len(predictions)):
-    #     print("{} wins".format(predictions[i]*max_wins))
+    print(accuracy)

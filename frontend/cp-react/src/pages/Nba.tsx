@@ -93,7 +93,7 @@ function Nba() {
           {outcome ? (
             <div>
               <h2>{outcome}</h2>
-              <img src={nbaLogos["OKC"]} alt="team logo" />
+              <img src={nbaLogos["MEM"]} alt="team logo" />
             </div>
           ) : (
             <>

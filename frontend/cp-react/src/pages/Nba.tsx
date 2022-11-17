@@ -5,7 +5,7 @@ import { SpinnerRoundFilled } from "spinners-react";
 import { Button } from "flowbite-react";
 import { ThemeContext } from "../components/ThemeContext";
 import { OptionType, OptionsType } from "./../util/types";
-import { nbaTeams } from "./../util/teams";
+import { nbaTeams, nbaLogos } from "../util/nba";
 
 function Nba() {
   const { theme } = React.useContext(ThemeContext);
@@ -93,6 +93,7 @@ function Nba() {
           {outcome ? (
             <div>
               <h2>{outcome}</h2>
+              <img src={nbaLogos["OKC"]} alt="team logo" />
             </div>
           ) : (
             <>

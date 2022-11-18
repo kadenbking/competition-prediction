@@ -36,9 +36,5 @@ def getTeamStats(team_id, year):
     return batting_totals_df, batting_header, pitching_totals_df, pitching_header
 
 if __name__ == "__main__":
-    stuff = getTeamStats('BAL', '2021')
-    print(stuff)
-
-    # stuff[0].to_csv('mlb.csv')
-    # stuff[2].to_csv('mlb1.csv')
-
+    sample = getTeamStats('KCR', '2021')
+    print(sample)

@@ -4,7 +4,6 @@ import numpy as np
 import random
 from prediction.utils.mlb_utils import get_team_data, generate_dataframe
 
-
 def getTeamDf(team_id, year):
     df_header = get_team_data(team_id, year, header=True)
     df_row = [get_team_data(team_id, year)]
@@ -12,8 +11,7 @@ def getTeamDf(team_id, year):
 
 def team_score(team_id, year):
     df = getTeamDf(team_id, year)
-    score = float(0.76*df['ORtg'] - 0.87*df['DRtg'] + df['MOV'] + 10.0*df['2P%'] + 0.66*df['DRB'] + df['SOS'])
-    # TODO: use model to get team score to run simulation with
+    score = float(df['W'])
     return score
 
 def simulate_game(t1_year, t2_year, t1_id, t2_id, epochs=100000, home_variation_max=100, away_variation_max=100, display_info=False):
@@ -36,8 +34,8 @@ def simulate_game(t1_year, t2_year, t1_id, t2_id, epochs=100000, home_variation_
     t2_wins = 0
 
     for i in range(epochs):
-        t1_random_variation = random.randint(0, home_variation_max) / 10  # parameter these
-        t2_random_variation = random.randint(0, away_variation_max) / 10   # parameter these
+        t1_random_variation = random.randint(0, home_variation_max) / 10
+        t2_random_variation = random.randint(0, away_variation_max) / 10
         t1_final_metric = t1_metric + t1_random_variation
         t2_final_metric = t2_metric + t2_random_variation
 

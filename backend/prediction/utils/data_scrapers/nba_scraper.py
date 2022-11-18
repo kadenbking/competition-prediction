@@ -32,5 +32,5 @@ def getTeamStats(team_id, year):
     return stats_df, stats_header, misc_df, misc_header
 
 if __name__ == "__main__":
-    stuff = getTeamStats('GSW', '2020')
-    # print(stuff)
+    sample = getTeamStats('GSW', '2020')
+    # print(sample)

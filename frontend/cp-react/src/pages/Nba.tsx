@@ -6,6 +6,7 @@ import { Button } from "flowbite-react";
 import { ThemeContext } from "../components/ThemeContext";
 import { OptionType, OptionsType } from "./../util/types";
 import { nbaTeams, nbaLogos } from "../util/nba";
+import frame from "../img/cp-frame.png";
 
 function Nba() {
   const { theme } = React.useContext(ThemeContext);
@@ -13,7 +14,7 @@ function Nba() {
   const [teamsList, setTeamsList] = useState<OptionsType>();
   const [homeTeam, setHomeTeam] = useState<OptionType>();
   const [awayTeam, setAwayTeam] = useState<OptionType>();
-  const [outcome, setOutcome] = useState<string>();
+  const [outcome, setOutcome] = useState<string>("s");
 
   useEffect(() => {
     getData();
@@ -93,7 +94,16 @@ function Nba() {
           {outcome ? (
             <div>
               <h2>{outcome}</h2>
-              <img src={nbaLogos["MEM"]} alt="team logo" />
+              <img
+                src={nbaLogos["MEM"]}
+                alt="team logo"
+                className="relative top-0 left-1/4 w-3/4 sm:w-3/5 md:w-1/4 lg:w-1/6"
+              />
+              <img
+                src={frame}
+                alt="crystal ball"
+                className="absolute top-1/4 left-1/4 w-5/6 sm:w-2/3 md:w-2/5 lg:w-1/3"
+              />
             </div>
           ) : (
             <>

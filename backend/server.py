@@ -14,8 +14,11 @@ def home():
 @app.route('/predict/<league>/<homeTeam>/<awayTeam>', methods=['GET'])
 def mlb(league=None, homeTeam=None, awayTeam=None):
     try:
-        if (league == "mlb"):
-            outcome = predict_mlb_game(homeTeam, awayTeam)
+        if (league == "mlb-stats"):
+            outcome = predict_mlb_game_stats(homeTeam, awayTeam)
+            return outcome
+        if (league == "mlb-model"):
+            outcome = predict_mlb_game_model(homeTeam, awayTeam)
             return outcome
         if (league == "nba"):
             outcome = predict_nba_game(homeTeam, awayTeam)

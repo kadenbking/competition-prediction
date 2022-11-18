@@ -51,3 +51,5 @@ def simulate_game(t1_year, t2_year, t1_id, t2_id, epochs=100000, home_variation_
     else:
         return t2_year, t2_id, float(t2_wins)/float(epochs/100), t1_year, t1_id
 
+def predict_game(home_team, away_team):
+    print("call to model")

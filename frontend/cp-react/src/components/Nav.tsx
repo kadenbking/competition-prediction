@@ -26,15 +26,6 @@ function Nav() {
         <Navbar.Link href="/mlb" className="text-lg align-middle">
           NFL
         </Navbar.Link>
-        <Navbar.Link href="/mlb" className="text-lg align-middle">
-          NHL
-        </Navbar.Link>
-        <Navbar.Link href="/mlb" className="text-lg align-middle">
-          NCAAF
-        </Navbar.Link>
-        <Navbar.Link href="/mlb" className="text-lg align-middle">
-          NCAAB
-        </Navbar.Link>
         <Navbar.Link
           onClick={() => {
             setTheme(theme === "dark" ? "light" : "dark");

@@ -4,9 +4,8 @@ import makeAnimated from "react-select/animated";
 import { SpinnerRoundFilled } from "spinners-react";
 import { Button } from "flowbite-react";
 import { ThemeContext } from "../components/ThemeContext";
-import { OptionType, OptionsType } from "./../util/types";
+import { OptionType, OptionsType, Outcome } from "./../util/types";
 import { mlbTeams, mlbLogos } from "../util/mlb";
-import frame from "../img/cp-frame.png";
 
 function Mlb() {
   const { theme } = React.useContext(ThemeContext);
@@ -14,7 +13,7 @@ function Mlb() {
   const [teamsList, setTeamsList] = useState<OptionsType>();
   const [homeTeam, setHomeTeam] = useState<OptionType>();
   const [awayTeam, setAwayTeam] = useState<OptionType>();
-  const [outcome, setOutcome] = useState<string>("w");
+  const [outcome, setOutcome] = useState<Outcome>();
 
   useEffect(() => {
     getData();
@@ -70,19 +69,26 @@ function Mlb() {
 
   function predict() {
     setSpinning(true);
-    fetch(`/predict/nba/${homeTeam?.label}/${awayTeam?.label}`)
-      .then((res) => res.text())
-      .then((text) => {
-        setOutcome(text);
+    fetch(`/predict/mlb/${homeTeam?.label}/${awayTeam?.label}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setOutcome(data);
         setSpinning(false);
       });
+  }
+
+  function reset() {
+    setSpinning(false);
+    setHomeTeam(null);
+    setAwayTeam(null);
+    setOutcome(null);
   }
 
   return (
     <div className="min-h-screen flex flex-col items-center mt-32 text-black dark:text-white">
       <h1 className="my-5 text-2xl font-bold">MLB Game Predictor</h1>
       {spinning ? (
-        <div>
+        <div className="mt-32">
           <SpinnerRoundFilled
             size={90}
             thickness={180}
@@ -96,28 +102,26 @@ function Mlb() {
             <div>
               <div className="relative my-20">
                 <img
-                  src={mlbLogos["KCR"]}
+                  src={mlbLogos[outcome.winningTeam]}
                   alt="team logo"
-                  className="relative mx-auto w-56 md:w-72"
+                  className="mx-auto w-72 md:w-96"
                 />
-                <div className="absolute top-0 w-60 md:w-80">
-                  <img
-                    src={frame}
-                    alt="crystal ball"
-                    className="-mx-14 md:-mx-24 -mt-20"
-                  />
-                </div>
               </div>
               <div>
-                <p className="mt-48">
-                  <span>{homeTeam?.label}</span> has a <span>{outcome}</span>{" "}
-                  chance to beat <span>{awayTeam?.label}</span>
+                <p className="text-xl">
+                  <span className="font-bold">{outcome.winningTeam}</span> has a{" "}
+                  <span className="font-bold">{outcome.percentage}</span>%
+                  chance to beat{" "}
+                  <span className="font-bold">{outcome.losingTeam}</span>
                 </p>
+              </div>
+              <div className="my-10 flex justify-center">
+                <Button onClick={reset}>Reset</Button>
               </div>
             </div>
           ) : (
             <>
-              <p className="my-5 max-w-md md:max-w-xl">
+              <p className="my-5 max-w-sm md:max-w-xl mx-auto">
                 Select a home and away team and click predict to see what
                 percentage of a chance each team has to win a game against each
                 other based on a trained supervised learning model.

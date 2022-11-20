@@ -13,16 +13,16 @@ function Home() {
         <h1 className="text-3xl text-center my-20 font-bold">
           Welcome to Competition Prediction!
         </h1>
-        <p className="max-w-md md:max-w-xl my-5">
+        <p className="max-w-sm md:max-w-xl my-5 mx-auto">
           Competition Prediction is a simple web app that uses statistical
           simulations and trained supervised learning models to predict outcomes
           of MLB, NBA, and NFL games.
         </p>
-        <p className="max-w-md md:max-w-xl my-5">
+        <p className="max-w-sm md:max-w-xl my-5 mx-auto">
           Select your sport of choice, home team, and away team to see
           predictions for any combination of teams.
         </p>
-        <p className="max-w-md md:max-w-xl my-5">
+        <p className="max-w-sm md:max-w-xl my-5 mx-auto">
           To learn more about how the predictor works, visit the repository
           below and check out the README.md and published paper.
         </p>

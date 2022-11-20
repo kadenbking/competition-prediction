@@ -31,14 +31,14 @@ import TBB from "../img/nfl-logos/TBB.png";
 import TEN from "../img/nfl-logos/TEN.png";
 import WAS from "../img/nfl-logos/WAS.png";
 
-export const mlbTeams = [
+export const nflTeams = [
     'ARI', 'ATL', 'BAL', 'BUF', 'CAR', 'CHI', 'CIN', 'CLE',
     'DAL', 'DEN', 'DET', 'GBP', 'HOU', 'IND', 'JAC', 'KCC',
     'LVR', 'LAC', 'LAR', 'MIA', 'MIN', 'NEP', 'NOS', 'NYG',
     'NYJ', 'PHI', 'PIT', 'SFO', 'SEA', 'TBB', 'TEN', 'WAS',
 ]
 
-export const mlbLogos: { [team: string]: any } = {
+export const nflLogos: { [team: string]: any } = {
     'ARI': ARI,
     'ATL': ATL,
     'BAL': BAL,

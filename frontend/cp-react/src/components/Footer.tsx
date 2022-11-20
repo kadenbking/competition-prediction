@@ -8,7 +8,7 @@ function Footer() {
       <FlowbiteFooter.Copyright
         href="/"
         by="Competition Prediction"
-        year={2022}
+        year={2023}
       />
       <FlowbiteFooter.LinkGroup>
         <FlowbiteFooter.Link href="https://github.com/kadenbking/competition-prediction">

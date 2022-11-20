@@ -18,6 +18,14 @@ module.exports = {
       'navy': colors.indigo,
       'purple': colors.purple,
       'gray': colors.gray,
+    },
+    width: {
+      20: '4.75rem',
+      24: '5.75rem',
+      56: '8rem',
+      60: '18rem',
+      72: '12rem',
+      80: '24rem',
     }
   },
   plugins: [

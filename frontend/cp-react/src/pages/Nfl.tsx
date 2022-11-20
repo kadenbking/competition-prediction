@@ -5,10 +5,10 @@ import { SpinnerRoundFilled } from "spinners-react";
 import { Button } from "flowbite-react";
 import { ThemeContext } from "../components/ThemeContext";
 import { OptionType, OptionsType } from "./../util/types";
-import { nbaTeams, nbaLogos } from "../util/nba";
+import { nflTeams, nflLogos } from "../util/nfl";
 import frame from "../img/cp-frame.png";
 
-function Nba() {
+function Nfl() {
   const { theme } = React.useContext(ThemeContext);
   const [spinning, setSpinning] = useState<boolean>(false);
   const [teamsList, setTeamsList] = useState<OptionsType>();
@@ -22,8 +22,8 @@ function Nba() {
 
   function getData() {
     const teamOptions: OptionsType = [];
-    for (let i = 0; i < nbaTeams.length; i++) {
-      teamOptions.push({ label: nbaTeams[i], value: i });
+    for (let i = 0; i < nflTeams.length; i++) {
+      teamOptions.push({ label: nflTeams[i], value: i });
     }
     setTeamsList(teamOptions);
   }
@@ -70,7 +70,7 @@ function Nba() {
 
   function predict() {
     setSpinning(true);
-    fetch(`/predict/nba/${homeTeam?.label}/${awayTeam?.label}`)
+    fetch(`/predict/nfl/${homeTeam?.label}/${awayTeam?.label}`)
       .then((res) => res.text())
       .then((text) => {
         setOutcome(text);
@@ -80,7 +80,7 @@ function Nba() {
 
   return (
     <div className="min-h-screen flex flex-col items-center mt-32 text-black dark:text-white">
-      <h1 className="my-5 text-2xl font-bold">NBA Game Predictor</h1>
+      <h1 className="my-5 text-2xl font-bold">NFL Game Predictor</h1>
       {spinning ? (
         <div>
           <SpinnerRoundFilled
@@ -96,7 +96,7 @@ function Nba() {
             <div>
               <div className="relative my-20">
                 <img
-                  src={nbaLogos["OKC"]}
+                  src={nflLogos["KCC"]}
                   alt="team logo"
                   className="relative mx-auto w-56 md:w-72"
                 />
@@ -109,7 +109,7 @@ function Nba() {
                 </div>
               </div>
               <div>
-                <p className="mt-60">
+                <p className="mt-72">
                   <span>{homeTeam?.label}</span> has a <span>{outcome}</span>{" "}
                   chance to beat <span>{awayTeam?.label}</span>
                 </p>
@@ -120,7 +120,7 @@ function Nba() {
               <p className="my-5 max-w-md md:max-w-xl">
                 Select a home and away team and click predict to see what
                 percentage of a chance each team has to win a game against each
-                other based on a statistical simulation.
+                other based on a trained supervised learning model.
               </p>
               <div className="flex flex-col md:flex-row items-center justify-center">
                 <div className="m-4">
@@ -155,4 +155,4 @@ function Nba() {
   );
 }
 
-export default Nba;
+export default Nfl;

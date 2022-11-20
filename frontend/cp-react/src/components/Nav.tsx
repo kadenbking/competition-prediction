@@ -8,7 +8,7 @@ function Nav() {
   const { theme, setTheme } = React.useContext(ThemeContext);
 
   return (
-    <Navbar fluid={true} rounded={false}>
+    <Navbar fluid={true} rounded={true}>
       <Navbar.Brand href="/">
         <img src={logo} className="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
@@ -17,30 +17,21 @@ function Nav() {
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse>
-        <Navbar.Link href="/mlb" className="text-lg align-middle">
+        <Navbar.Link href="/mlb" className="text-lg text-center">
           MLB
         </Navbar.Link>
-        <Navbar.Link href="/mlb" className="text-lg align-middle">
+        <Navbar.Link href="/nba" className="text-lg text-center">
           NBA
         </Navbar.Link>
-        <Navbar.Link href="/mlb" className="text-lg align-middle">
+        <Navbar.Link href="/nfl" className="text-lg text-center">
           NFL
-        </Navbar.Link>
-        <Navbar.Link href="/mlb" className="text-lg align-middle">
-          NHL
-        </Navbar.Link>
-        <Navbar.Link href="/mlb" className="text-lg align-middle">
-          NCAAF
-        </Navbar.Link>
-        <Navbar.Link href="/mlb" className="text-lg align-middle">
-          NCAAB
         </Navbar.Link>
         <Navbar.Link
           onClick={() => {
             setTheme(theme === "dark" ? "light" : "dark");
           }}
         >
-          <div className="transition duration-500 ease-in-out rounded-full mt-1 align-middle">
+          <div className="transition duration-500 ease-in-out rounded-full mt-1 flex justify-center">
             {theme === "dark" ? (
               <FaSun className="text-white text-xl cursor-pointer" />
             ) : (

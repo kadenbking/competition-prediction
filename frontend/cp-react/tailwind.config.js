@@ -18,7 +18,7 @@ module.exports = {
       'navy': colors.indigo,
       'purple': colors.purple,
       'gray': colors.gray,
-    }
+    },
   },
   plugins: [
     require('flowbite/plugin')

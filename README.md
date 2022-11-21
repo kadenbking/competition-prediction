@@ -20,7 +20,7 @@ Lorem Ipsum...
 
 ### Statistical Simulation
 
-To predict NBA games, a statistical simulation using a custom team metric based on specific team stats was used. This is not AI or ML necessarily, but a fun way to produce a percentage one team has to beat another. 
+To predict NBA games, a statistical simulation using a custom team metric based on specific team stats was used. This is not AI or ML necessarily, but a fun way to produce a percentage one team has to beat another. Inspiration for the simulation was taken from [here](https://github.com/sidharthrajaram/CrystalBall).
 
 ## Flask API
 

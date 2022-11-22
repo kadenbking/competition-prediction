@@ -8,8 +8,10 @@ import { OptionType, OptionsType, Outcome } from "./../util/types";
 import { mlbTeams, mlbLogos } from "../util/mlb";
 
 function Mlb() {
+  const ApiLink = "https://competition-prediction.onrender.com";
   const { theme } = React.useContext(ThemeContext);
   const [spinning, setSpinning] = useState<boolean>(false);
+  const [displayError, setDisplayError] = useState<boolean>(false);
   const [teamsList, setTeamsList] = useState<OptionsType>();
   const [homeTeam, setHomeTeam] = useState<OptionType>();
   const [awayTeam, setAwayTeam] = useState<OptionType>();
@@ -69,16 +71,60 @@ function Mlb() {
 
   function predict() {
     setSpinning(true);
-    fetch(`/predict/mlb/${homeTeam?.label}/${awayTeam?.label}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setOutcome(data);
-        setSpinning(false);
-      });
+    try {
+      // LOCAL LINK
+      // fetch(`/predict/nba/${homeTeam?.label}/${awayTeam?.label}`)
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     setOutcome(data);
+      //     setSpinning(false);
+      //   });
+      fetch(`${ApiLink}/predict/mlb/${homeTeam?.label}/${awayTeam?.label}`, {
+        method: "GET",
+        mode: "no-cors",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setOutcome(data);
+          setSpinning(false);
+        });
+    } catch {
+      setSpinning(false);
+      setDisplayError(true);
+    }
   }
+
+  const spinner = (
+    <div className="mt-32">
+      <SpinnerRoundFilled
+        size={90}
+        thickness={180}
+        speed={70}
+        color="rgba(57, 114, 172, 1)"
+      />
+    </div>
+  );
+
+  const errorMessage = (
+    <div className="mt-16 text-center">
+      <h2 className="text-lg font-bold">Unexpected Error</h2>
+      <p className="my-5 max-w-sm md:max-w-xl mx-auto">
+        Something went wrong trying to predict this matchup. Please try again
+        later.
+      </p>
+      <div className="my-10 flex justify-center">
+        <Button onClick={reset}>Try Again</Button>
+      </div>
+    </div>
+  );
 
   function reset() {
     setSpinning(false);
+    setDisplayError(false);
     setHomeTeam(null);
     setAwayTeam(null);
     setOutcome(null);
@@ -87,15 +133,10 @@ function Mlb() {
   return (
     <div className="min-h-screen flex flex-col items-center mt-32 text-black dark:text-white">
       <h1 className="my-5 text-2xl font-bold">MLB Game Predictor</h1>
-      {spinning ? (
-        <div className="mt-32">
-          <SpinnerRoundFilled
-            size={90}
-            thickness={180}
-            speed={70}
-            color="rgba(57, 114, 172, 1)"
-          />
-        </div>
+      {displayError ? (
+        errorMessage
+      ) : spinning ? (
+        spinner
       ) : (
         <>
           {outcome ? (

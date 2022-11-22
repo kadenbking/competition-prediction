@@ -27,5 +27,5 @@ def mlb(league=None, homeTeam=None, awayTeam=None):
     except KeyError:
         return 'Error! Something is not working...'
 
-if __name__ == "__main__":
-    app.run()
+# if __name__ == "__main__":
+#     app.run()

@@ -14,9 +14,9 @@ function Home() {
           Welcome to Competition Prediction!
         </h1>
         <p className="max-w-sm md:max-w-xl my-5 mx-auto">
-          Competition Prediction is a simple web app that uses statistical
-          simulations and trained supervised learning models to predict outcomes
-          of MLB, NBA, and NFL games.
+          Competition Prediction is a simple web app that uses trained
+          supervised learning models to predict outcomes of MLB, NBA, and NFL
+          games.
         </p>
         <p className="max-w-sm md:max-w-xl my-5 mx-auto">
           Select your sport of choice, home team, and away team to see

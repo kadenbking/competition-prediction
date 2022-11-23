@@ -109,6 +109,5 @@ plot_learning_curve(
 plot = plt.plot([accuracy, precision, recall])
 plt.savefig('nflModel-neuralnet.png')
 
-
-
-pickle.dump(svm, open('nfl-model.pkl','wb'))
+# Save best model for API
+pickle.dump(mlp, open('nfl-model.pkl','wb'))

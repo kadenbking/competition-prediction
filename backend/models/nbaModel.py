@@ -8,7 +8,7 @@ from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neural_network import MLPClassifier
 
-PATH = '/Users/kadenking/School/Fall2022/competition-prediction/backend/models/datasets/nba-game-results.csv'
+PATH = 'datasets/nba-game-results.csv'
 
 #SVC Model
 df = pd.read_csv(PATH)
@@ -76,7 +76,7 @@ plot_learning_curve(
 plt.savefig('nbaModel-tree.png')
 
 
-#Neural Network
+# #Neural Network
 df = pd.read_csv(PATH)
 
 X = df.iloc[:, :-1].values
@@ -109,6 +109,5 @@ plot_learning_curve(
 plot = plt.plot([accuracy, precision, recall])
 plt.savefig('nbaModel-neuralnet.png')
 
-
-
-pickle.dump(svm, open('nba-model.pkl','wb'))
+# Save best model for API
+pickle.dump(tree, open('nba-model.pkl','wb'))

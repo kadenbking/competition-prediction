@@ -8,7 +8,7 @@ from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neural_network import MLPClassifier
 
-PATH = 'mlb-game-results-2022.csv'
+PATH = 'datasets/mlb-game-results-2022.csv'
 
 #SVC Model
 df = pd.read_csv(PATH)
@@ -109,6 +109,5 @@ plot_learning_curve(
 plot = plt.plot([accuracy, precision, recall])
 plt.savefig('mlbModel-neuralnet.png')
 
-
-
-pickle.dump(svm, open('mlb-model.pkl','wb'))
+# Save best model for API
+pickle.dump(tree, open('mlb-model.pkl','wb'))

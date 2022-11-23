@@ -1,5 +1,5 @@
 import pickle
-from models.teamsLists import *
+from models.helpers.teamsLists import *
 
 def mlb_predict(home_team, away_team):
     mlbModel = pickle.load(open('models/mlb-model.pkl','rb'))

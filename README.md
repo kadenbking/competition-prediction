@@ -32,7 +32,7 @@ If you would like to run this project locally, clone the `dev` branch to your ma
 
 To run the API locally, navigate to the `backend` directory, and run `python3 server.py`. As you hit different endpoints, watch your terminal to view printed output from the various prediction tools.
 
-To run the frontend locally, nagivate to the `frontend/cp-react` directory, and run `npm run start`. Each of the `fetch` statements on the `local` branch are using a proxy to connect to your locally run API.
+To run the frontend locally, nagivate to the `frontend/cp-react` directory, and run `npm run start`. Each of the `fetch` statements on the `dev` branch are using a proxy to connect to your locally run API.
 
 ### Statistical Simulation
 

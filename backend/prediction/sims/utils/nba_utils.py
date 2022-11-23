@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from prediction.utils.data_scrapers.nba_scraper import getTeamStats
+from prediction.sims.utils.data_scrapers.nba_scraper import getTeamStats
 # from data_scrapers.nba_scraper import getTeamStats UNCOMMENT THIS LINE TO RUN THIS FILE
 
 def get_team_data(team_id, year, header=False):

@@ -7,7 +7,7 @@ def predict_mlb_game_stats(home_team, away_team):
     return "{} {} has a {}% chance of beating {} {}.".format(win_team_year, win_team_id, win_team_percent, lose_team_year, lose_team_id)
 
 def predict_mlb_game_model(home_team, away_team):
-    predict_game(home_team, away_team)
+    return predict_game(home_team, away_team)
 
 if __name__ == "__main__":
     win_team_year, win_team_id, win_team_percent, lose_team_year, lose_team_id = \

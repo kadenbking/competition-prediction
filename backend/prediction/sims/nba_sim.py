@@ -1,5 +1,5 @@
 import random
-from prediction.utils.nba_utils import get_team_data, generate_dataframe
+from prediction.sims.utils.nba_utils import get_team_data, generate_dataframe
 
 def getTeamDf(team_id, year):
     df_header = get_team_data(team_id, year, header=True)

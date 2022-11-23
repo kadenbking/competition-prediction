@@ -4,7 +4,7 @@ import makeAnimated from "react-select/animated";
 import { SpinnerRoundFilled } from "spinners-react";
 import { Button } from "flowbite-react";
 import { ThemeContext } from "../components/ThemeContext";
-import { OptionType, OptionsType, Outcome } from "./../util/types";
+import { OptionType, OptionsType, MlbOutcome } from "./../util/types";
 import { mlbTeams, mlbLogos } from "../util/mlb";
 
 function Mlb() {
@@ -15,7 +15,7 @@ function Mlb() {
   const [teamsList, setTeamsList] = useState<OptionsType>();
   const [homeTeam, setHomeTeam] = useState<OptionType>();
   const [awayTeam, setAwayTeam] = useState<OptionType>();
-  const [outcome, setOutcome] = useState<Outcome>();
+  const [outcome, setOutcome] = useState<MlbOutcome>();
 
   useEffect(() => {
     getData();
@@ -69,16 +69,37 @@ function Mlb() {
     return true;
   }
 
+  function getWinner(result: string): void {
+    const outcome: MlbOutcome = {
+      winningTeam: "",
+      losingTeam: "",
+    };
+
+    if (homeTeam && awayTeam) {
+      if (result === "1") {
+        outcome.winningTeam = homeTeam?.label;
+        outcome.losingTeam = awayTeam?.label;
+      } else {
+        outcome.winningTeam = awayTeam?.label;
+        outcome.losingTeam = homeTeam?.label;
+      }
+    }
+
+    setOutcome(outcome);
+  }
+
   function predict() {
     setSpinning(true);
     try {
       // LOCAL LINK
-      // fetch(`/predict/nba/${homeTeam?.label}/${awayTeam?.label}`)
-      //   .then((res) => res.json())
-      //   .then((data) => {
-      //     setOutcome(data);
+      // fetch(`/predict/mlb/${homeTeam?.label}/${awayTeam?.label}`)
+      //   .then((res) => res.text())
+      //   .then((text) => {
+      //     console.log(text);
+      //     getWinner(text);
       //     setSpinning(false);
       //   });
+
       fetch(`${ApiLink}/predict/mlb/${homeTeam?.label}/${awayTeam?.label}`, {
         method: "GET",
         mode: "no-cors",
@@ -87,9 +108,10 @@ function Mlb() {
           "Content-Type": "application/json",
         },
       })
-        .then((res) => res.json())
-        .then((data) => {
-          setOutcome(data);
+        .then((res) => res.text())
+        .then((text) => {
+          console.log(text);
+          getWinner(text);
           setSpinning(false);
         });
     } catch {
@@ -149,10 +171,10 @@ function Mlb() {
                 />
               </div>
               <div>
-                <p className="text-xl">
-                  <span className="font-bold">{outcome.winningTeam}</span> has a{" "}
-                  <span className="font-bold">{outcome.percentage}</span>%
-                  chance to beat{" "}
+                <p className="text-xl text-center">
+                  We predict that {""}
+                  <span className="font-bold">{outcome.winningTeam}</span>
+                  {""} will defeat {""}
                   <span className="font-bold">{outcome.losingTeam}</span>
                 </p>
               </div>

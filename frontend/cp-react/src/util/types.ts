@@ -6,3 +6,8 @@ export type Outcome = {
     losingTeam: string;
     percentage: string;
 } | null;
+
+export type MlbOutcome = {
+    winningTeam: string;
+    losingTeam: string;
+} | null;

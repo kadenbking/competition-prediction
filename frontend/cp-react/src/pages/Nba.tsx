@@ -73,25 +73,25 @@ function Nba() {
     setSpinning(true);
     try {
       // LOCAL LINK
-      // fetch(`/predict/nba/${homeTeam?.label}/${awayTeam?.label}`)
-      //   .then((res) => res.json())
-      //   .then((data) => {
-      //     setOutcome(data);
-      //     setSpinning(false);
-      //   });
-      fetch(`${ApiLink}/predict/nba/${homeTeam?.label}/${awayTeam?.label}`, {
-        method: "GET",
-        mode: "no-cors",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      })
+      fetch(`/predict/nba/${homeTeam?.label}/${awayTeam?.label}`)
         .then((res) => res.json())
         .then((data) => {
           setOutcome(data);
           setSpinning(false);
         });
+      // fetch(`${ApiLink}/predict/nba/${homeTeam?.label}/${awayTeam?.label}`, {
+      //   method: "GET",
+      //   mode: "no-cors",
+      //   headers: {
+      //     "Access-Control-Allow-Origin": "*",
+      //     "Content-Type": "application/json",
+      //   },
+      // })
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     setOutcome(data);
+      //     setSpinning(false);
+      //   });
     } catch {
       setSpinning(false);
       setDisplayError(true);

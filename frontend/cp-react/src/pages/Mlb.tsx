@@ -163,7 +163,7 @@ function Mlb() {
         <>
           {outcome ? (
             <div>
-              <div className="relative my-20">
+              <div className="relative mt-8 mb-16">
                 <img
                   src={mlbLogos[outcome.winningTeam]}
                   alt="team logo"

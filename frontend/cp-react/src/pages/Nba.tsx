@@ -8,7 +8,6 @@ import { OptionType, OptionsType, Outcome } from "./../util/types";
 import { nbaTeams, nbaLogos } from "../util/nba";
 
 function Nba() {
-  // const ApiLink = "https://competition-prediction.onrender.com";
   const { theme } = React.useContext(ThemeContext);
   const [spinning, setSpinning] = useState<boolean>(false);
   const [displayError, setDisplayError] = useState<boolean>(false);
@@ -69,29 +68,35 @@ function Nba() {
     return true;
   }
 
+  function getWinner(result: string): void {
+    const outcome: Outcome = {
+      winningTeam: "",
+      losingTeam: "",
+    };
+
+    if (homeTeam && awayTeam) {
+      if (result === "1") {
+        outcome.winningTeam = homeTeam?.label;
+        outcome.losingTeam = awayTeam?.label;
+      } else {
+        outcome.winningTeam = awayTeam?.label;
+        outcome.losingTeam = homeTeam?.label;
+      }
+    }
+
+    setOutcome(outcome);
+  }
+
   function predict() {
     setSpinning(true);
     try {
-      // LOCAL LINK
       fetch(`/predict/nba/${homeTeam?.label}/${awayTeam?.label}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setOutcome(data);
+        .then((res) => res.text())
+        .then((text) => {
+          console.log(text);
+          getWinner(text);
           setSpinning(false);
         });
-      // fetch(`${ApiLink}/predict/nba/${homeTeam?.label}/${awayTeam?.label}`, {
-      //   method: "GET",
-      //   mode: "no-cors",
-      //   headers: {
-      //     "Access-Control-Allow-Origin": "*",
-      //     "Content-Type": "application/json",
-      //   },
-      // })
-      //   .then((res) => res.json())
-      //   .then((data) => {
-      //     setOutcome(data);
-      //     setSpinning(false);
-      //   });
     } catch {
       setSpinning(false);
       setDisplayError(true);
@@ -141,7 +146,7 @@ function Nba() {
         <>
           {outcome ? (
             <div>
-              <div className="relative my-20">
+              <div className="relative mt-8 mb-16">
                 <img
                   src={nbaLogos[outcome.winningTeam]}
                   alt="team logo"
@@ -149,10 +154,10 @@ function Nba() {
                 />
               </div>
               <div>
-                <p className="text-xl">
-                  <span className="font-bold">{outcome.winningTeam}</span> has a{" "}
-                  <span className="font-bold">{outcome.percentage}</span>%
-                  chance to beat{" "}
+                <p className="text-xl text-center">
+                  We predict that {""}
+                  <span className="font-bold">{outcome.winningTeam}</span>
+                  {""} will defeat {""}
                   <span className="font-bold">{outcome.losingTeam}</span>
                 </p>
               </div>
@@ -165,7 +170,7 @@ function Nba() {
               <p className="my-5 max-w-sm md:max-w-xl mx-auto">
                 Select a home and away team and click predict to see what
                 percentage of a chance each team has to win a game against each
-                other based on a statistical simulation.
+                other based on a trained supervised learning model.
               </p>
               <div className="flex flex-col md:flex-row items-center justify-center">
                 <div className="m-4">

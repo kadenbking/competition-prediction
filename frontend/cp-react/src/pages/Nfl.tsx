@@ -8,7 +8,6 @@ import { OptionType, OptionsType, Outcome } from "./../util/types";
 import { nflTeams, nflLogos } from "../util/nfl";
 
 function Nfl() {
-  const ApiLink = "https://competition-prediction.onrender.com";
   const { theme } = React.useContext(ThemeContext);
   const [spinning, setSpinning] = useState<boolean>(false);
   const [displayError, setDisplayError] = useState<boolean>(false);
@@ -69,27 +68,33 @@ function Nfl() {
     return true;
   }
 
+  function getWinner(result: string): void {
+    const outcome: Outcome = {
+      winningTeam: "",
+      losingTeam: "",
+    };
+
+    if (homeTeam && awayTeam) {
+      if (result === "1") {
+        outcome.winningTeam = homeTeam?.label;
+        outcome.losingTeam = awayTeam?.label;
+      } else {
+        outcome.winningTeam = awayTeam?.label;
+        outcome.losingTeam = homeTeam?.label;
+      }
+    }
+
+    setOutcome(outcome);
+  }
+
   function predict() {
     setSpinning(true);
-    // LOCAL LINK
-    // fetch(`/predict/nba/${homeTeam?.label}/${awayTeam?.label}`)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setOutcome(data);
-    //     setSpinning(false);
-    //   });
     try {
-      fetch(`${ApiLink}/predict/nfl/${homeTeam?.label}/${awayTeam?.label}`, {
-        method: "GET",
-        mode: "no-cors",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setOutcome(data);
+      fetch(`/predict/nfl/${homeTeam?.label}/${awayTeam?.label}`)
+        .then((res) => res.text())
+        .then((text) => {
+          console.log(text);
+          getWinner(text);
           setSpinning(false);
         });
     } catch {
@@ -141,7 +146,7 @@ function Nfl() {
         <>
           {outcome ? (
             <div>
-              <div className="relative my-20">
+              <div className="relative mt-8 mb-16">
                 <img
                   src={nflLogos[outcome.winningTeam]}
                   alt="team logo"
@@ -149,10 +154,10 @@ function Nfl() {
                 />
               </div>
               <div>
-                <p className="text-xl">
-                  <span className="font-bold">{outcome.winningTeam}</span> has a{" "}
-                  <span className="font-bold">{outcome.percentage}</span>%
-                  chance to beat{" "}
+                <p className="text-xl text-center">
+                  We predict that {""}
+                  <span className="font-bold">{outcome.winningTeam}</span>
+                  {""} will defeat {""}
                   <span className="font-bold">{outcome.losingTeam}</span>
                 </p>
               </div>

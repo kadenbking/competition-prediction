@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request
 from prediction.nba_predict import *
+from prediction.mlb_predict import *
 from predictions import *
 
 app = Flask(__name__)
@@ -23,9 +24,12 @@ def mlb(league=None, homeTeam=None, awayTeam=None):
         if (league == "nfl"):
             outcome = nfl_predict(homeTeam, awayTeam)
             return outcome
-        # if (league == "nba"):
-        #     outcome = predict_nba_game(homeTeam, awayTeam)
-        #     return outcome
+        if (league == "nba-stats"):
+            outcome = predict_nba_game(homeTeam, awayTeam)
+            return outcome
+        if (league == "mlb-stats"):
+            outcome = predict_mlb_game(homeTeam, awayTeam)
+            return outcome
         return "League Not Supported."
     except KeyError:
         return 'Error! Something is not working...'

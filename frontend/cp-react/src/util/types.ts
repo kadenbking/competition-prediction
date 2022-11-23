@@ -4,10 +4,4 @@ export type OptionsType = Array<OptionType>;
 export type Outcome = {
     winningTeam: string;
     losingTeam: string;
-    percentage: string;
-} | null;
-
-export type MlbOutcome = {
-    winningTeam: string;
-    losingTeam: string;
 } | null;

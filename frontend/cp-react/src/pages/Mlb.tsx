@@ -4,18 +4,17 @@ import makeAnimated from "react-select/animated";
 import { SpinnerRoundFilled } from "spinners-react";
 import { Button } from "flowbite-react";
 import { ThemeContext } from "../components/ThemeContext";
-import { OptionType, OptionsType, MlbOutcome } from "./../util/types";
+import { OptionType, OptionsType, Outcome } from "./../util/types";
 import { mlbTeams, mlbLogos } from "../util/mlb";
 
 function Mlb() {
-  const ApiLink = "https://competition-prediction.onrender.com";
   const { theme } = React.useContext(ThemeContext);
   const [spinning, setSpinning] = useState<boolean>(false);
   const [displayError, setDisplayError] = useState<boolean>(false);
   const [teamsList, setTeamsList] = useState<OptionsType>();
   const [homeTeam, setHomeTeam] = useState<OptionType>();
   const [awayTeam, setAwayTeam] = useState<OptionType>();
-  const [outcome, setOutcome] = useState<MlbOutcome>();
+  const [outcome, setOutcome] = useState<Outcome>();
 
   useEffect(() => {
     getData();
@@ -70,7 +69,7 @@ function Mlb() {
   }
 
   function getWinner(result: string): void {
-    const outcome: MlbOutcome = {
+    const outcome: Outcome = {
       winningTeam: "",
       losingTeam: "",
     };
@@ -91,23 +90,7 @@ function Mlb() {
   function predict() {
     setSpinning(true);
     try {
-      // LOCAL LINK
-      // fetch(`/predict/mlb/${homeTeam?.label}/${awayTeam?.label}`)
-      //   .then((res) => res.text())
-      //   .then((text) => {
-      //     console.log(text);
-      //     getWinner(text);
-      //     setSpinning(false);
-      //   });
-
-      fetch(`${ApiLink}/predict/mlb/${homeTeam?.label}/${awayTeam?.label}`, {
-        method: "GET",
-        mode: "no-cors",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      })
+      fetch(`/predict/mlb/${homeTeam?.label}/${awayTeam?.label}`)
         .then((res) => res.text())
         .then((text) => {
           console.log(text);

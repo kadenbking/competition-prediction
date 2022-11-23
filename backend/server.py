@@ -18,8 +18,14 @@ def mlb(league=None, homeTeam=None, awayTeam=None):
             outcome = mlb_predict(homeTeam, awayTeam)
             return outcome
         if (league == "nba"):
-            outcome = predict_nba_game(homeTeam, awayTeam)
+            outcome = nba_predict(homeTeam, awayTeam)
             return outcome
+        if (league == "nfl"):
+            outcome = nfl_predict(homeTeam, awayTeam)
+            return outcome
+        # if (league == "nba"):
+        #     outcome = predict_nba_game(homeTeam, awayTeam)
+        #     return outcome
         return "League Not Supported."
     except KeyError:
         return 'Error! Something is not working...'

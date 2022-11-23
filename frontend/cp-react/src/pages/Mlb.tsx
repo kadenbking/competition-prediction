@@ -8,6 +8,7 @@ import { OptionType, OptionsType, Outcome } from "./../util/types";
 import { mlbTeams, mlbLogos } from "../util/mlb";
 
 function Mlb() {
+  const ApiLink = "https://competition-prediction.onrender.com";
   const { theme } = React.useContext(ThemeContext);
   const [spinning, setSpinning] = useState<boolean>(false);
   const [displayError, setDisplayError] = useState<boolean>(false);
@@ -90,7 +91,14 @@ function Mlb() {
   function predict() {
     setSpinning(true);
     try {
-      fetch(`/predict/mlb/${homeTeam?.label}/${awayTeam?.label}`)
+      fetch(`${ApiLink}/predict/mlb/${homeTeam?.label}/${awayTeam?.label}`, {
+        method: "GET",
+        mode: "no-cors",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      })
         .then((res) => res.text())
         .then((text) => {
           console.log(text);

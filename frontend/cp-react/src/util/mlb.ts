@@ -9,7 +9,7 @@ import CLE from "../img/mlb-logos/CLE.png";
 import COL from "../img/mlb-logos/COL.png";
 import DET from "../img/mlb-logos/DET.png";
 import HOU from "../img/mlb-logos/HOU.png";
-import KCR from "../img/mlb-logos/KCR.png";
+import KCR from "./../img/mlb-logos/KCR.png";
 import LAA from "../img/mlb-logos/LAA.png";
 import LAD from "../img/mlb-logos/LAD.png";
 import MIA from "../img/mlb-logos/MIA.png";

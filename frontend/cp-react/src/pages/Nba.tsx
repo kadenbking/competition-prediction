@@ -8,7 +8,7 @@ import { OptionType, OptionsType, Outcome } from "./../util/types";
 import { nbaTeams, nbaLogos } from "../util/nba";
 
 function Nba() {
-  const ApiLink = "https://competition-prediction.onrender.com";
+  // const ApiLink = "https://competition-prediction.onrender.com";
   const { theme } = React.useContext(ThemeContext);
   const [spinning, setSpinning] = useState<boolean>(false);
   const [displayError, setDisplayError] = useState<boolean>(false);

@@ -1,5 +1,5 @@
 
-mlbTeams = {
+nflTeams = {
     'ARI': 1,
     'ATL': 2,
     'BAL': 3,

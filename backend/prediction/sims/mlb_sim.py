@@ -1,5 +1,4 @@
 import random
-import pickle
 from prediction.sims.utils.mlb_utils import get_team_data, generate_dataframe
 
 def getTeamDf(team_id, year):
@@ -48,50 +47,3 @@ def simulate_game(t1_year, t2_year, t1_id, t2_id, epochs=100000, home_variation_
         return t1_year, t1_id, float(t1_wins)/float(epochs/100), t2_year, t2_id
     else:
         return t2_year, t2_id, float(t2_wins)/float(epochs/100), t1_year, t1_id
-
-def predict_game(home_team, away_team):
-    mlbModel = pickle.load(open('/Users/kadenking/School/Fall2022/competition-prediction/models/mlb-model.pkl','rb'))
-
-    mlbTeams = {
-        'ARI': 1,
-        'ATL': 2,
-        'BAL': 3,
-        'BOS': 4,
-        'CHC': 5,
-        'CHW': 6,
-        'CIN': 7,
-        'CLE': 8,
-        'COL': 9,
-        'DET': 10,
-        'HOU': 11,
-        'KCR': 12,
-        'LAA': 13,
-        'LAD': 14,
-        'MIA': 15,
-        'MIL': 16,
-        'MIN': 17,
-        'NYM': 18,
-        'NYY': 19,
-        'OAK': 20,
-        'PHI': 21,
-        'PIT': 22,
-        'SDP': 23,
-        'SFG': 24,
-        'SEA': 25,
-        'STL': 26,
-        'TBR': 27,
-        'TEX': 28,
-        'TOR': 29,
-        'WSN': 30,
-    }
-
-    team1 = mlbTeams[home_team]
-    team2 = mlbTeams[away_team]
-
-    input = [team1, team2]
-
-    outcome = mlbModel.predict([input])
-    return f'Result - {outcome}'
-
-if __name__ == "__main__":
-    predict_game('KCR', 'LAA')

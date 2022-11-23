@@ -15,7 +15,7 @@ import pickle
 
 
 #SVC Model
-PATH = 'mlb-game-results-2022.csv'
+PATH = 'nba-game-results-2022.csv'
 df = pd.read_csv(PATH)
 
 X = df.iloc[:, :-1].values
@@ -45,12 +45,17 @@ plot_learning_curve(
     n_jobs=4
 )
 
-plt.savefig('mlbModel-svm.png')
+plt.savefig('nbaModel-svm.png')
+
+
+
+
+
 
 
 #Decision Tree
 
-
+PATH = 'nba-game-results-2022.csv'
 df = pd.read_csv(PATH)
 
 X = df.iloc[:, :-1].values
@@ -82,7 +87,7 @@ plot_learning_curve(
 )
 
 
-plt.savefig('mlbModel-tree.png')
+plt.savefig('nbaModel-tree.png')
 
 
 
@@ -121,11 +126,11 @@ plot_learning_curve(
     n_jobs=4
 )
 
-plt.savefig('mlbModel-neuralnet.png')
+plt.savefig('nbaModel-neuralnet.png')
 
 
 plot = plt.plot([accuracy, precision, recall])
-plt.savefig('mlbModel-neuralnet.png')
+plt.savefig('nbaModel-neuralnet.png')
 
 
 

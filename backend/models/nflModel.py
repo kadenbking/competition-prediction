@@ -8,7 +8,7 @@ from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neural_network import MLPClassifier
 
-PATH = '/Users/kadenking/School/Fall2022/competition-prediction/backend/models/datasets/nfl-game-results-2018-2021.csv'
+PATH = 'datasets/nfl-game-results-2018-2021.csv'
 
 #SVC Model
 df = pd.read_csv(PATH)

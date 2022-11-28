@@ -28,6 +28,12 @@ The frontend was written in typescript using the Create React App boostrap templ
 
 If you would like to run this project locally, clone the `dev` branch to your machine. Our code is split into 2 separate branches for the sake of live deployments with `main` being reserved for that purpose.
 
+### Requirements
+
+Before running this project locally, you may need to install the following pacakages. Inside the `backend` directory you will find a `requirements.txt` file containing all python libraries needed to run this project. You can use `pip` or `conda` to install any of these libraries.
+To run the React app, confirm that Node is installed, open a terminal in the `frontend` directory, and run `npm i` to install all packages needed.
+Once you have installed the required packages for both apps, you should be able to proceed.
+
 ### Available Scripts
 
 To run the API locally, navigate to the `backend` directory, and run `python3 server.py`. As you hit different endpoints, watch your terminal to view printed output from the various prediction tools.

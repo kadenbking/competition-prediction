@@ -46,6 +46,6 @@ On the `local` branch, there are an additional 2 endpoints available -- one for 
 
 ## Learn More
 
-To learn more about this project, check out this paper published [here](https://kadenbking.com/).
+To learn more about this project, check out this paper published [here](https://drive.google.com/file/d/1AtmS8Pkh3yETY3Br5HJtaF71cRfOzDRZ/view?usp=sharing).
 
 ![alt text](https://github.com/kadenbking/competition-prediction/blob/main/frontend/cp-react/src/img/cp-logo.png?raw=true)
